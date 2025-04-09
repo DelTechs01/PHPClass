@@ -124,10 +124,10 @@
             <form action="adddetails.php" method="POST">
                 <h3>Hostel Registration</h3>
                 <label for="hostelNumber">Hostel Number :</label>
-                <input type="number" id="hostelNumber" name="hostelNummber" required>
+               <input type="number" id="hostelCode" name="hostelCode" required>
 
                 <label for="roomNumber">Room Number :</label>
-                <input type="number" name="roomNumber" id="roomNumber" required>
+                <input type="number" name="roomCode" id="roomNumber" required>
 
                 <label for="regNo">Student Reg No :</label>
                 <input type="text" name="regNo" id="regNo" required>
