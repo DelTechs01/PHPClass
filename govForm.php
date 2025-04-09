@@ -113,6 +113,25 @@
       }
     }
   </style>
+  <?php
+  $servername = "localhost:3310";
+  $username = "root";
+  $password = "@Password01";
+  $dbname = "form_db";
+
+  $conn = new mysqli($servername, $username, $password, $dbname);
+  if ($conn  -> connect_error) {
+    die("Connection Failed" . $conn -> connect_error);
+  }
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $email_or_id = trim(htmlspecialchars($_POST['email']));
+    $password = trim(htmlspecialchars($_POST['password']));
+
+    $stmt = $conn -> prepare("SELECT * FROM users WHERE email = ? OR id_number = ?");
+    $stmt -> bind_param("ss", $email_or_id, $email_or_id);
+}
+  ?>
 </head>
 <body>
   <div class="container">
