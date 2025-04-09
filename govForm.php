@@ -130,6 +130,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $stmt = $conn -> prepare("SELECT * FROM users WHERE email = ? OR id_number = ?");
     $stmt -> bind_param("ss", $email_or_id, $email_or_id);
+    $stmt -> execute();
+    $result = $stmt -> get_result();
+    if ($result -> num_rows > 0) {
+        $user = $result -> fetch_assoc();
+        if (password_verify($password, $user['password'])) {
+            session_start();
+            $_SESSION['user_id'] = $user['id'];
+            header("Location: dashboard.php");
+            exit();
+        } else {
+            echo "<script>alert('Invalid password. Please try again.');</script>";
+        }
+    } else {
+        echo "<script>alert('No user found with that email or ID number.');</script>";
+    }
+    $stmt -> close();
 }
   ?>
 </head>
